@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "758887531690",
+    "project_id": "vegan-market-1d92d",
+    "storage_bucket": "vegan-market-1d92d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758887531690:android:22b8166a6164a10902fcd3",
+        "android_client_info": {
+          "package_name": "com.example.shopmart2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "758887531690-6rn1ki98dr7vs6177kqe27vqf612gg7h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shopmart2",
+            "certificate_hash": "a945c17d8f2c6f9334c309d30334968bd513fa9c"
+          }
+        },
+        {
+          "client_id": "758887531690-hbstfljunf9r1m1pu9hts3t8r5spgc54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQg2x515_ZE4es_M7qHBlZAJHoiIklSRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "758887531690-hbstfljunf9r1m1pu9hts3t8r5spgc54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
