@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shopmart2/screens/fetch_screen.dart';
 import 'package:shopmart2/screens/login/login_screen.dart';
 import 'package:shopmart2/screens/login/sign_up_screen.dart';
+import 'package:shopmart2/screens/main_screen.dart';
 import 'package:shopmart2/services/general_methods.dart';
 
 class BoardingScreen extends StatelessWidget {
@@ -43,6 +45,13 @@ class BoardingScreen extends StatelessWidget {
               child: const Text("Create an Account",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 18), )
           ),
           const SizedBox(height: 15,),
+          TextButton(
+              onPressed: (){
+                GlobalMethods().navigateTo(context: context, route: const FetchScreen());
+
+              },
+              child: Text('Continue As a guest?')
+          )
 
         ],
       ),

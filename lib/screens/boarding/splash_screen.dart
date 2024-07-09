@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/consts/consts.dart';
 import 'package:shopmart2/provider/signup_provider.dart';
+import 'package:shopmart2/screens/boarding/boarding_screen.dart';
 import 'package:shopmart2/screens/home_screen.dart';
 import 'package:shopmart2/screens/login/login_screen.dart';
 
@@ -25,8 +26,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     return FlutterSplashScreen.fadeIn(
+      useImmersiveMode: true,
+      animationDuration: const Duration(seconds: 10),
       asyncNavigationCallback: () async { await themeState.getCustomerData();},
-        nextScreen: FirebaseAuth.instance.currentUser == null ? LoginScreen() :  MainScreen(),
+        nextScreen: FirebaseAuth.instance.currentUser == null ? const BoardingScreen() :  MainScreen(),
         childWidget: Container(
       decoration: const BoxDecoration(
         image: DecorationImage(image: AssetImage('assets/landing/background4.jpg'),fit: BoxFit.fitHeight,),

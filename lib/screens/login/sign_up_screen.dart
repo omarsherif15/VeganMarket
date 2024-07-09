@@ -4,6 +4,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/provider/signup_provider.dart';
+import 'package:shopmart2/screens/fetch_screen.dart';
 import 'package:shopmart2/screens/login/login_screen.dart';
 import 'package:shopmart2/screens/main_screen.dart';
 import 'package:shopmart2/widgets/or_divider_widget.dart';
@@ -142,7 +143,7 @@ class SignUpScreen extends StatelessWidget {
                                   showToast(ToastificationType.error, myProvider.errorMsg);
                                 }
                                 else {
-                                  GlobalMethods().navigateTo(context: context, route: MainScreen());
+                                  GlobalMethods().navigateTo(context: context, route: const FetchScreen());
                                   myProvider.createUser(
                                     fullName: nameTextController.text,
                                     emailAddress: emailTextController.text,
@@ -197,7 +198,7 @@ class SignUpScreen extends StatelessWidget {
                                   showToast(ToastificationType.error, myProvider.errorMsg);
                                 }
                                 else {
-                                  GlobalMethods().navigateTo(context: context, route: MainScreen());
+                                  GlobalMethods().navigateTo(context: context, route: const FetchScreen());
                                   myProvider.createUser(
                                     fullName: nameTextController.text,
                                     emailAddress: emailTextController.text,

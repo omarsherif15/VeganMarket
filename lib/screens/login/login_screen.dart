@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/provider/login_provider.dart';
+import 'package:shopmart2/screens/fetch_screen.dart';
 import 'package:shopmart2/screens/login/forgetPassword.dart';
 import 'package:shopmart2/screens/login/sign_up_screen.dart';
   import 'package:shopmart2/widgets/or_divider_widget.dart';
@@ -135,7 +136,7 @@ import '../main_screen.dart';
                                             Navigator.pushAndRemoveUntil(
                                                 context, MaterialPageRoute(
                                                 builder: (context) =>
-                                                    MainScreen()), (
+                                                    const FetchScreen()), (
                                                 route) => false);
                                           }
                                         },);
@@ -187,7 +188,7 @@ import '../main_screen.dart';
                                     Navigator.pushAndRemoveUntil(
                                         context, MaterialPageRoute(
                                         builder: (context) =>
-                                            MainScreen()), (
+                                            const FetchScreen()), (
                                         route) => false);
                                   }
                                 },);

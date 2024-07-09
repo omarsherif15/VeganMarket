@@ -25,7 +25,6 @@ class ProductsProvider with ChangeNotifier {
         onValue.docs.forEach((element) async {
           newProductsList.add(ProductModel.fromJson(element.data()));
         });
-        print(newProductsList[0].title);
         notifyListeners();
       });
       isListLoading = false;
@@ -40,7 +39,6 @@ class ProductsProvider with ChangeNotifier {
       notifyListeners();
     }
     isListLoading = false;
-    print(newProductsList[0].title);
     notifyListeners();
   }
 
@@ -50,8 +48,6 @@ class ProductsProvider with ChangeNotifier {
     for (var element in newProductsList) {
       if(element.isOnSale) {
         productOnSale.add(element);
-        print(element.title);
-        print('mmmmmmmmmmmmmmmmmmmmmmm');
       }
     }
     notifyListeners();

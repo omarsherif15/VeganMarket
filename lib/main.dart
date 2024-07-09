@@ -66,22 +66,22 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_){
-          return DarkThemeProvider()..getCustomerData();
+          return DarkThemeProvider();
     }),
         ChangeNotifierProvider(create: (_){
-          return ProductsProvider()..getProducts()..getSaleProducts();
+          return ProductsProvider();
         }),
         ChangeNotifierProvider(create: (_){
           return CartProvider() ;
         }),
         ChangeNotifierProvider(create: (_){
-          return WishlistProvider()..getWishListItems(currentCustomerUID) ;
+          return WishlistProvider() ;
         }),
         ChangeNotifierProvider(create: (_){
           return SignupProvider() ;
         }),
         ChangeNotifierProvider(create: (_){
-          return OrdersProvider()..getMyOrders() ;
+          return OrdersProvider() ;
         }),
       ],
         child: Consumer<DarkThemeProvider>(
