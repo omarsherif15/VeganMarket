@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:shopmart2/models/cartModel/cart_model.dart';
 import 'package:shopmart2/models/orders_model/order_model.dart';
+import 'package:shopmart2/provider/cart_provider.dart';
 
 import '../consts/consts.dart';
 
@@ -39,12 +40,28 @@ class OrdersProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<List<CartModel>> getCartItems (customerId)async{
+    List<CartModel> cartItems = [];
+    await FirebaseFirestore.instance.collection('Customers').doc(
+        currentCustomerUID).collection('CartList').snapshots().forEach((value){
+      for (var element in value.docs) {
+        cartItems.add(CartModel.fromJson(element.data()));
+      }
+      print(cartItems);
+    });
+    return cartItems;
+  }
+
 
   Future<void> createNewOrder({
     required String orderId,
+    required String?  comment,
+    required String? shippingAddress,
+    required String? phoneNo,
     required int quantity,
     required double totalPrice,
-    required List<CartModel> cartItems,
+    required double shippingFee,
+    required List<Map<String, dynamic>> cartItems,
     required String status,
   }) async {
     OrderModel orderModel = OrderModel(
@@ -54,15 +71,24 @@ class OrdersProvider with ChangeNotifier {
       totalQuantity: quantity,
       cartItems: cartItems,
       status: status,
+      comment: comment,
+      orderAddress: shippingAddress,
+      phoneNo: phoneNo,
+      shipping: shippingFee,
       createdAt: DateFormat('dd/MM/yyyy kk:mm ').format(DateTime.now()),
     );
-    try {
-      await FirebaseFirestore.instance.collection('Orders')
+      print('a7aaaaaaaaaaaaa');
+      try
+    {
+      await FirebaseFirestore.instance
+          .collection('Orders')
           .doc(orderId)
           .set(orderModel.toMap());
     }
-    on FirebaseException catch (error){
-      print('${error.message} 0000000');
+    on FirebaseException catch (e){
+        print(e.message);
     }
+    print('a7aaaaaaaaaaaaa333333');
+
   }
 }

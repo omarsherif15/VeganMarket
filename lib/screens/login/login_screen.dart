@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/provider/login_provider.dart';
-import 'package:shopmart2/screens/fetch_screen.dart';
+import 'package:shopmart2/screens/boarding/fetch_screen.dart';
 import 'package:shopmart2/screens/login/forgetPassword.dart';
 import 'package:shopmart2/screens/login/sign_up_screen.dart';
   import 'package:shopmart2/widgets/or_divider_widget.dart';
@@ -13,7 +13,6 @@ import 'package:toastification/toastification.dart';
   import '../../services/general_methods.dart';
   import '../../widgets/show_toast.dart';
 import '../../widgets/text_field_widget.dart';
-import '../main_screen.dart';
 
   class LoginScreen extends StatelessWidget {
     LoginScreen({super.key});

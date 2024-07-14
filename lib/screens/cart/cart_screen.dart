@@ -9,7 +9,6 @@ import 'package:shopmart2/models/cartModel/cart_model.dart';
 import 'package:shopmart2/provider/cart_provider.dart';
 import 'package:shopmart2/provider/order_provider.dart';
 import 'package:shopmart2/screens/cart/cart_widget.dart';
-import 'package:shopmart2/stripePaymentManger/payment_manger.dart';
 import 'package:shopmart2/widgets/fallBack_widget.dart';
 import 'package:uuid/uuid.dart';
 import '../../services/general_methods.dart';
@@ -27,8 +26,6 @@ class CartScreen extends StatelessWidget {
        StreamBuilder(
         stream: FirebaseFirestore.instance.collection('Customers').doc(currentCustomerUID).collection('CartList').snapshots(),
         builder: (context, snapShot) {
-         provider.getCartItems(customerModel);
-          print(provider.cartItems);
           if (snapShot.connectionState == ConnectionState.waiting) {
             return const Center(child: SpinKitThreeBounce(
               size: 50,
@@ -36,6 +33,10 @@ class CartScreen extends StatelessWidget {
             ));
           }
           else if (snapShot.connectionState == ConnectionState.active) {
+            List <Map<String, dynamic>> cart = [];
+            snapShot.data!.docs.forEach((element){
+              cart.add(element.data());
+            });
               return ConditionalBuilder(
                     condition: snapShot.data!.docs.isNotEmpty,
                     builder: (context) =>
@@ -77,14 +78,18 @@ class CartScreen extends StatelessWidget {
                                               double.infinity, 50)
                                       ),
                                       onPressed: () {
-                                        final uid = const Uuid().v4().substring(0,7);
-                                        PaymentManger.stripePayment(40, 'USD');
+                                        final uid = const Uuid().v4().substring(0,8);
+                                        //PaymentManger.stripePayment(40, 'USD');
                                         ordersProvider.createNewOrder(
                                             orderId: uid,
                                             quantity: customerModel!.currentCartQuantity,
                                             totalPrice: customerModel!.currentCartCost,
-                                            cartItems: provider.cartItems,
-                                            status: 'Active'
+                                            cartItems: cart,
+                                            status: 'Active',
+                                          comment: 'Please ship as soon as possible. Because I am buying this as a gift. Willing to pay extra for fast shipping',
+                                          phoneNo: customerModel!.phoneNumber,
+                                          shippingAddress: "104 Ambr Street, Gesr-Swes, Cairo, Egypt",
+                                          shippingFee: 0.00
                                         );
                                       },
                                       child: Text("Checkout ${customerModel!.currentCartQuantity} Items for ${customerModel!.currentCartCost} EGP",

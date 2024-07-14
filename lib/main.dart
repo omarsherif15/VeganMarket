@@ -5,6 +5,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/consts/consts.dart';
 import 'package:shopmart2/consts/theme_data.dart';
+import 'package:shopmart2/provider/address_provider.dart';
 import 'package:shopmart2/provider/cart_provider.dart';
 import 'package:shopmart2/provider/dark_theme_provider.dart';
 import 'package:shopmart2/provider/order_provider.dart';
@@ -12,7 +13,6 @@ import 'package:shopmart2/provider/products_provider.dart';
 import 'package:shopmart2/provider/signup_provider.dart';
 import 'package:shopmart2/provider/wishList_provider.dart';
 import 'package:shopmart2/screens/boarding/splash_screen.dart';
-import 'package:shopmart2/screens/main_screen.dart';
 import 'package:shopmart2/stripePaymentManger/stripe_keys.dart';
 import 'package:toastification/toastification.dart';
 
@@ -69,10 +69,10 @@ class _MyAppState extends State<MyApp> {
           return DarkThemeProvider();
     }),
         ChangeNotifierProvider(create: (_){
-          return ProductsProvider();
+          return ProductsProvider()..getSaleProducts()..getProducts();
         }),
         ChangeNotifierProvider(create: (_){
-          return CartProvider() ;
+          return CartProvider();
         }),
         ChangeNotifierProvider(create: (_){
           return WishlistProvider() ;
@@ -82,6 +82,9 @@ class _MyAppState extends State<MyApp> {
         }),
         ChangeNotifierProvider(create: (_){
           return OrdersProvider() ;
+        }),
+        ChangeNotifierProvider(create: (_){
+          return AddressProvider() ;
         }),
       ],
         child: Consumer<DarkThemeProvider>(

@@ -1,13 +1,8 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopmart2/consts/consts.dart';
-import 'package:shopmart2/provider/signup_provider.dart';
 import 'package:shopmart2/screens/boarding/boarding_screen.dart';
-import 'package:shopmart2/screens/home_screen.dart';
-import 'package:shopmart2/screens/login/login_screen.dart';
 
 import '../../provider/dark_theme_provider.dart';
 import '../main_screen.dart';

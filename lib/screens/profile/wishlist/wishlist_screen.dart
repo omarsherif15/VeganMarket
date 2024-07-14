@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/consts/consts.dart';
-import 'package:shopmart2/inner_screens/wishlist/wishlist_widget.dart';
+import 'package:shopmart2/screens/profile/wishlist/wishlist_widget.dart';
 import 'package:shopmart2/provider/wishList_provider.dart';
 import 'package:shopmart2/screens/main_screen.dart';
 import 'package:shopmart2/widgets/fallBack_widget.dart';
-import '../../provider/dark_theme_provider.dart';
-import '../../widgets/warning_dialog.dart';
+import '../../../provider/dark_theme_provider.dart';
+import '../../../widgets/warning_dialog.dart';
 
 class WishListScreen extends StatelessWidget {
   const WishListScreen({super.key});

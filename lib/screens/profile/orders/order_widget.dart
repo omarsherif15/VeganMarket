@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shopmart2/screens/profile/orders/order_details.dart';
+import 'package:shopmart2/services/general_methods.dart';
 
-import '../../models/orders_model/order_model.dart';
+import '../../../models/orders_model/order_model.dart';
 
 class OrderWidget extends StatelessWidget {
   const OrderWidget({super.key, required this.orderModel});
@@ -52,7 +54,7 @@ class OrderWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text('Total Payment',style: TextStyle(fontSize: 12,color: Colors.grey),),
-                      Text('\$${orderModel.totalPrice}',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
+                      Text('EGP ${orderModel.totalPrice}',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
 
                     ],
                   ),
@@ -66,7 +68,9 @@ class OrderWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlinedButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        GlobalMethods().navigateTo(context: context, route: OrderDetails(orderModel: orderModel,));
+                      },
                     style: OutlinedButton.styleFrom(
                       minimumSize: Size(MediaQuery.of(context).size.width*0.38,50),
                       backgroundColor: Colors.grey.shade200,

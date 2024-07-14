@@ -4,14 +4,14 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/consts/consts.dart';
 import 'package:shopmart2/consts/theme_data.dart';
-import 'package:shopmart2/inner_screens/orders/orders_screen.dart';
-import 'package:shopmart2/inner_screens/wishlist/wishlist_screen.dart';
+import 'package:shopmart2/screens/profile/address_screen/address_screen.dart';
+import 'package:shopmart2/screens/profile/orders/orders_screen.dart';
+import 'package:shopmart2/screens/profile/wishlist/wishlist_screen.dart';
 import 'package:shopmart2/provider/dark_theme_provider.dart';
 import 'package:shopmart2/provider/login_provider.dart';
 import 'package:shopmart2/provider/signup_provider.dart';
 import 'package:shopmart2/screens/boarding/boarding_screen.dart';
 import 'package:shopmart2/screens/login/forgetPassword.dart';
-import 'package:shopmart2/screens/login/login_screen.dart';
 import 'package:shopmart2/screens/profile/profile_card.dart';
 import 'package:shopmart2/services/general_methods.dart';
 import 'package:shopmart2/widgets/fallBack_widget.dart';
@@ -76,7 +76,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'Address',
                     subTitle: 'Address 1 ',
                     leading: IconlyLight.user2,
-                    onTap: () {}),
+                    onTap: () {
+                      GlobalMethods().navigateTo(context: context, route: const AddressScreen());
+                    }),
               ),
               ProfileCard(
                   title: 'Orders',

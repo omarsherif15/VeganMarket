@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shopmart2/screens/fetch_screen.dart';
+import 'package:shopmart2/screens/boarding/fetch_screen.dart';
 import 'package:shopmart2/screens/login/login_screen.dart';
 import 'package:shopmart2/screens/login/sign_up_screen.dart';
-import 'package:shopmart2/screens/main_screen.dart';
 import 'package:shopmart2/services/general_methods.dart';
 
 class BoardingScreen extends StatelessWidget {
@@ -50,7 +49,7 @@ class BoardingScreen extends StatelessWidget {
                 GlobalMethods().navigateTo(context: context, route: const FetchScreen());
 
               },
-              child: Text('Continue As a guest?')
+              child: const Text('Continue As a guest?')
           )
 
         ],

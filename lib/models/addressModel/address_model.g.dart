@@ -8,7 +8,10 @@ part of 'address_model.dart';
 
 ShippingAddress _$ShippingAddressFromJson(Map<String, dynamic> json) =>
     ShippingAddress(
+      shippingAddressID: json['shippingAddressID'] as String?,
       name: json['name'] as String?,
+      houseNo: json['houseNo'] as String?,
+      phoneNo: json['phoneNo'] as String?,
       streetAddress: json['streetAddress'] as String?,
       cityName: json['cityName'] as String?,
       countryName: json['countryName'] as String?,
@@ -17,7 +20,10 @@ ShippingAddress _$ShippingAddressFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ShippingAddressToJson(ShippingAddress instance) =>
     <String, dynamic>{
+      'shippingAddressID': instance.shippingAddressID,
       'name': instance.name,
+      'houseNo': instance.houseNo,
+      'phoneNo': instance.phoneNo,
       'streetAddress': instance.streetAddress,
       'cityName': instance.cityName,
       'countryName': instance.countryName,

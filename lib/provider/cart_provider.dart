@@ -6,18 +6,7 @@ import '../models/cartModel/cart_model.dart';
 
 class CartProvider with ChangeNotifier{
 
-  List<CartModel> cartItems = [];
-  Future<void> getCartItems (customerId)async{
-     await FirebaseFirestore.instance.collection('Customers').doc(
-        currentCustomerUID).collection('CartList').snapshots().forEach((value){
-          cartItems = [];
-          for (var element in value.docs) {
-            print(element.data()['quantity']);
-            cartItems.add(CartModel(productId: element.data()['productId'], quantity: element.data()['quantity']));
-          }
-          print(cartItems);
-    });
-  }
+
 
 
   Future<void> addProductsToCart ({

@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:shopmart2/provider/order_provider.dart';
 import 'package:shopmart2/widgets/fallBack_widget.dart';
 
-import '../../screens/main_screen.dart';
-import '../../services/general_methods.dart';
+import '../../main_screen.dart';
+import '../../../services/general_methods.dart';
 import 'active_order_screen.dart';
 import 'cancelled_order_screen.dart';
 import 'completed_order_screen.dart';
@@ -17,7 +17,7 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<OrdersProvider>(
         builder: (_, provider ,child) => ConditionalBuilder(
-            condition: provider.orders.isNotEmpty,
+            condition: !provider.orders.isNotEmpty,
             builder: (context) => DefaultTabController(
               length:3,
               child: Scaffold(

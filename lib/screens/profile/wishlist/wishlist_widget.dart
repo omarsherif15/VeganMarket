@@ -7,7 +7,7 @@ import 'package:shopmart2/models/wishlistModel/wishlist_model.dart';
 import 'package:shopmart2/provider/cart_provider.dart';
 import 'package:shopmart2/provider/wishList_provider.dart';
 import 'package:shopmart2/services/general_methods.dart';
-import '../../provider/products_provider.dart';
+import '../../../provider/products_provider.dart';
 
 
 class WishlistWidget extends StatelessWidget {

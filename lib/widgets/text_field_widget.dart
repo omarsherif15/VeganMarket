@@ -6,37 +6,39 @@ import '../provider/dark_theme_provider.dart';
 
 class MyTextField extends StatelessWidget {
   MyTextField({
-    required this.icon,
+    this.icon,
     required this.hint,
     super.key,
     required this.textEditingController,
     required this.validate,
-    required this.focusNode,
-    required this.gotoFocusNode
+    this.focusNode,
+    this.gotoFocusNode,
+    this.decoration,
+    this.padding = 15
   });
 
   final String hint;
-  final Icon icon;
+  final Icon? icon;
   TextEditingController textEditingController = TextEditingController();
   String? Function(String?) validate;
-  FocusNode focusNode, gotoFocusNode;
+  FocusNode? focusNode, gotoFocusNode;
+  InputBorder? decoration = const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey)
+  );
+  double padding = 15;
 
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     final themeData = Styles.themeData(themeState.getDarkTheme(), context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15.0),
+      padding:  EdgeInsets.symmetric(vertical: padding),
       child: TextFormField(
         maxLines: 1,
         controller: textEditingController,
         decoration:  InputDecoration(
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey)
-          ),
-          focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.green)
-          ),
+          enabledBorder: decoration,
+          focusedBorder: decoration,
           hintText: hint,
           prefixIcon: icon,
           focusColor: Colors.green,

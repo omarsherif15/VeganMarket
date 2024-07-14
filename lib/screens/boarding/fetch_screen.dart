@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/provider/dark_theme_provider.dart';
+import 'package:shopmart2/provider/order_provider.dart';
 import 'package:shopmart2/screens/main_screen.dart';
 
-import '../provider/products_provider.dart';
 
 
 class FetchScreen extends StatefulWidget {
-  const FetchScreen({Key? key}) : super(key: key);
+  const FetchScreen({super.key});
 
   @override
   State<FetchScreen> createState() => _FetchScreenState();
@@ -20,10 +20,8 @@ class _FetchScreenState extends State<FetchScreen> {
     Future.delayed(const Duration(microseconds: 5), () async {
       final themeState = Provider.of<DarkThemeProvider>(context, listen: false);
       await themeState.getCustomerData();
-      final productsProvider =
-          Provider.of<ProductsProvider>(context, listen: false);
-      productsProvider.getProducts();
-      productsProvider.getSaleProducts();
+      final orders = Provider.of<OrdersProvider>(context, listen: false);
+      await orders.getMyOrders();
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (ctx) =>  MainScreen(),
       ));

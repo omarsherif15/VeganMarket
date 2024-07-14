@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -7,9 +8,13 @@ part 'order_model.g.dart';
 class OrderModel with ChangeNotifier{
   String? orderId;
   String? userUid;
+  String? orderAddress;
+  String? phoneNo;
+  String? comment;
   double? totalPrice;
+  double? shipping;
   int? totalQuantity;
-  List<CartModel> cartItems;
+  List<Map<String, dynamic>>? cartItems;
   String? status;
   String? createdAt;
 
@@ -17,6 +22,10 @@ class OrderModel with ChangeNotifier{
       {
         required this.orderId,
         required this.userUid,
+        required this.orderAddress,
+        required this.phoneNo,
+        required this.shipping,
+        required this.comment,
         required this.totalPrice,
         required this.totalQuantity,
         required this.cartItems,
@@ -27,5 +36,4 @@ class OrderModel with ChangeNotifier{
   factory OrderModel.fromJson(Map<String, dynamic>? json) => _$OrderModelFromJson(json!);
 
   Map<String, dynamic> toMap () => _$OrderModelToJson(this);
-
 }

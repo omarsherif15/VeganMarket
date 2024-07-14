@@ -18,6 +18,7 @@ class ProductsProvider with ChangeNotifier {
     isListLoading = true;
     notifyListeners();
     try {
+      newProductsList = [];
       await FirebaseFirestore.instance
           .collection('Products')
           .get()
