@@ -9,6 +9,7 @@ class CustomerModel with ChangeNotifier{
   String? emailAddress;
   String? phoneNumber;
   String? imageUrl;
+  String? defaultShippingAddress;
   String? createdAt;
   String? loginType;
   int? totalSpent;
@@ -19,6 +20,7 @@ class CustomerModel with ChangeNotifier{
       {
         required this.customerUID,
         required this.fullName,
+        required this.defaultShippingAddress,
         required this.emailAddress,
         required this.phoneNumber,
         required this.imageUrl,

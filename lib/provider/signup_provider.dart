@@ -114,6 +114,7 @@ class SignupProvider with ChangeNotifier {
           totalSpent: 0,
           currentCartCost: 0,
           currentCartQuantity: 0,
+       defaultShippingAddress: ''
 
     );
     await FirebaseFirestore.instance

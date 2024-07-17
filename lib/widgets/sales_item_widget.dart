@@ -17,15 +17,7 @@ class ProductCardBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeState = Provider.of<DarkThemeProvider>(context);
-    final themeData = Styles.themeData(themeState.getDarkTheme(), context);
-    //final productModel = Provider.of<ProductModel>(context);
-    final cartProvider = Provider.of<CartProvider>(context);
-    final wishlistProvider = Provider.of<WishlistProvider>(context);
-
-    bool? isInCartList = false; //customerModel.inCartList?.any((item) => item.productId == productModel!.id);
-    print(isInCartList);
-    //bool _isInWishlist = wishlistProvider.getWishlistItem.containsKey(productModel!.id);
+    WishlistProvider wishList = Provider.of<WishlistProvider>(context);
     int quantity = 1;
 
     return InkWell(
@@ -63,10 +55,23 @@ class ProductCardBuilder extends StatelessWidget {
                                ),
                              ),
                             const Spacer(),
-                            InkWell(
-                              child:false ?  const Icon(IconlyBold.heart, color: Colors.red,) : const Icon(IconlyLight.heart),
-                              onTap: () {
-                                wishlistProvider.addAndRemoveFromWishlist(productId: productModel!.id);
+                            Consumer<WishlistProvider>(
+                              builder: (_,provider, child) {
+                                Future<bool> inWish = provider.toogleWishListButton(productModel!.id);
+                                print(productModel!.id);
+                                print(inWish);
+                                return FutureBuilder(
+                                  future: inWish,
+                                  builder: (context,snapshot) {
+                                    bool inWishList = snapshot.data ?? false;
+                                    return InkWell(
+                                    child: inWishList ?  const Icon(IconlyBold.heart, color: Colors.red,) : const Icon(IconlyLight.heart),
+                                    onTap: () {
+                                      provider.addAndRemoveFromWishlist(productId: productModel!.id);
+                                    },
+                                                                  );
+                                  }
+                                );
                               },
                             ),
                           ],
@@ -135,21 +140,25 @@ class ProductCardBuilder extends StatelessWidget {
                   width: 130,
                   color: Colors.grey.shade300,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                      onTap: (){
-                        !isInCartList ?
-                        cartProvider.addProductsToCart(
-                            productId: productModel!.id,
-                            quantity: quantity,
-                            productPrice: productModel!.isOnSale ? productModel!.salePrice : productModel!.price
+                Consumer<CartProvider>(
+                  builder: (_,provider, child) {
+                    return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                        onTap: (){
+                          !provider.inCartList ?
+                          provider.addProductsToCart(
+                              productId: productModel!.id,
+                              quantity: quantity,
+                              productPrice: productModel!.isOnSale ? productModel!.salePrice : productModel!.price
 
-                        )
-                        :
-                            print('inCart Already');
-                      },
-                      child: Text(!isInCartList ? 'Add To Cart' : 'In Cart',style: const TextStyle(fontSize: 15),)),
+                          )
+                          :
+                              print('inCart Already');
+                        },
+                        child: Text(!provider.inCartList ? 'Add To Cart' : 'In Cart',style: const TextStyle(fontSize: 15),)),
+                  );
+                  },
                 ),
           ],
         ),

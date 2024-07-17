@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/provider/dark_theme_provider.dart';
 import 'package:shopmart2/provider/order_provider.dart';
+import 'package:shopmart2/provider/products_provider.dart';
 import 'package:shopmart2/screens/main_screen.dart';
 
 
@@ -19,12 +20,12 @@ class _FetchScreenState extends State<FetchScreen> {
   void initState() {
     Future.delayed(const Duration(microseconds: 5), () async {
       final themeState = Provider.of<DarkThemeProvider>(context, listen: false);
+      final product = Provider.of<ProductsProvider>(context, listen: false);
       await themeState.getCustomerData();
-      final orders = Provider.of<OrdersProvider>(context, listen: false);
-      await orders.getMyOrders();
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (ctx) =>  MainScreen(),
-      ));
+      await product.getProducts();
+      product.getSaleProducts();
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) =>  MainScreen(),));
     });
     super.initState();
   }

@@ -1,6 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:shopmart2/consts/consts.dart';
@@ -12,13 +17,15 @@ import 'package:shopmart2/provider/order_provider.dart';
 import 'package:shopmart2/provider/products_provider.dart';
 import 'package:shopmart2/provider/signup_provider.dart';
 import 'package:shopmart2/provider/wishList_provider.dart';
-import 'package:shopmart2/screens/boarding/splash_screen.dart';
+import 'package:shopmart2/screens/boarding/boarding_screen.dart';
+import 'package:shopmart2/screens/boarding/fetch_screen.dart';
 import 'package:shopmart2/stripePaymentManger/stripe_keys.dart';
 import 'package:toastification/toastification.dart';
 
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   Stripe.publishableKey = ApiKeys.publishableKey;
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -57,7 +64,14 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     themeChangerProvider.getCustomerData();
     getCurrentThemeData();
+    FlutterNativeSplash.remove();
     super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   // This widget is the root of your application.
@@ -69,7 +83,7 @@ class _MyAppState extends State<MyApp> {
           return DarkThemeProvider();
     }),
         ChangeNotifierProvider(create: (_){
-          return ProductsProvider()..getSaleProducts()..getProducts();
+          return ProductsProvider();
         }),
         ChangeNotifierProvider(create: (_){
           return CartProvider();
@@ -94,7 +108,7 @@ class _MyAppState extends State<MyApp> {
               title: 'Flutter Demo',
               debugShowCheckedModeBanner: false,
               theme: Styles.themeData(themeProvider.getDarkTheme(), context),
-              home:  const SplashScreen()
+              home: FirebaseAuth.instance.currentUser == null ? const BoardingScreen() :  const FetchScreen(),
             ),
           );
         }

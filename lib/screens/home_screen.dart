@@ -44,7 +44,6 @@ class HomeScreen extends StatelessWidget {
         ),
         body: Consumer<ProductsProvider>(
           builder: (_,provider, child) {
-            provider.getSaleProducts();
             return SingleChildScrollView(
               child: Column(
             children: [

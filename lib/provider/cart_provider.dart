@@ -88,14 +88,8 @@ class CartProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  //
-  // void removeCartItem ({required String productId}){
-  //   _cartItems.remove(productId);
-  //   notifyListeners();
-  // }
-  //
-  // void clearCart (){
-  //   _cartItems.clear();
-  //   notifyListeners();
-  // }
+  bool inCartList = false;
+  void toogleAddCartIcon(bool inCartList) async {
+    this.inCartList = inCartList;
+  }
 }

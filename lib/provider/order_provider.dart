@@ -40,19 +40,7 @@ class OrdersProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<CartModel>> getCartItems (customerId)async{
-    List<CartModel> cartItems = [];
-    await FirebaseFirestore.instance.collection('Customers').doc(
-        currentCustomerUID).collection('CartList').snapshots().forEach((value){
-      for (var element in value.docs) {
-        cartItems.add(CartModel.fromJson(element.data()));
-      }
-      print(cartItems);
-    });
-    return cartItems;
-  }
-
-
+  bool orderCreated = false;
   Future<void> createNewOrder({
     required String orderId,
     required String?  comment,
@@ -63,6 +51,7 @@ class OrdersProvider with ChangeNotifier {
     required double shippingFee,
     required List<Map<String, dynamic>> cartItems,
     required String status,
+    required context
   }) async {
     OrderModel orderModel = OrderModel(
       orderId: orderId,
@@ -83,12 +72,42 @@ class OrdersProvider with ChangeNotifier {
       await FirebaseFirestore.instance
           .collection('Orders')
           .doc(orderId)
-          .set(orderModel.toMap());
+          .set(orderModel.toMap()).then((onValue){
+            orderCreated = true;
+            notifyListeners();
+            Future.delayed(Duration(seconds: 15), () async {
+              orderCreated = false;
+              await FirebaseFirestore.instance.collection('Customers')
+                  .doc(currentCustomerUID).collection('CartList').get().then((value){
+                 value.docs.forEach((element){
+                   FirebaseFirestore.instance.collection('Customers')
+                       .doc(currentCustomerUID).collection('CartList').doc(element.id).delete();
+                 });
+              });
+              await FirebaseFirestore.instance.collection('Customers')
+                  .doc(currentCustomerUID).update({
+                'currentCartCost' : 0,
+                'currentCartQuantity' : 0
+              });
+              notifyListeners();
+              Navigator.pop(context);
+
+            });
+          });
     }
     on FirebaseException catch (e){
         print(e.message);
     }
     print('a7aaaaaaaaaaaaa333333');
-
+  }
+  String shippingFeeRadioButton = 'free';
+  void toogleShippingFeeRadioButton (value){
+    shippingFeeRadioButton = value;
+    notifyListeners();
+  }
+  String paymentMethodRadioButton = 'cash';
+  void tooglePaymentMethodRadioButton (value){
+    paymentMethodRadioButton = value;
+    notifyListeners();
   }
 }

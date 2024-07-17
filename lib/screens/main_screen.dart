@@ -43,12 +43,11 @@ class MainScreen extends StatelessWidget {
           ),
           BottomNavigationBarItem(
               label: 'My Cart',
-              icon: customerModel != null ? BadgedCartIcon(count: customerModel!.currentCartQuantity): const Icon(IconlyLight.buy)),
+              icon: customerModel != null && customerModel!.currentCartQuantity != 0 ?
+              BadgedCartIcon(count: customerModel!.currentCartQuantity)
+                  :
+              const Icon(IconlyLight.buy)),
 
-              //   } else {
-              //     return
-              //   }
-              // })
           const BottomNavigationBarItem(
               label: 'Profile',
               icon: Icon(IconlyLight.user2)

@@ -18,14 +18,9 @@ import 'package:shopmart2/widgets/fallBack_widget.dart';
 import 'package:shopmart2/widgets/warning_dialog.dart';
 
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);

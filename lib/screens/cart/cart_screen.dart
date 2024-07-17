@@ -9,6 +9,7 @@ import 'package:shopmart2/models/cartModel/cart_model.dart';
 import 'package:shopmart2/provider/cart_provider.dart';
 import 'package:shopmart2/provider/order_provider.dart';
 import 'package:shopmart2/screens/cart/cart_widget.dart';
+import 'package:shopmart2/screens/profile/orders/create_order.dart';
 import 'package:shopmart2/widgets/fallBack_widget.dart';
 import 'package:uuid/uuid.dart';
 import '../../services/general_methods.dart';
@@ -20,6 +21,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List <Map<String, dynamic>> cart = [];
     OrdersProvider ordersProvider = Provider.of<OrdersProvider>(context);
     return Consumer<CartProvider>(
       builder: (_,provider, child) =>
@@ -33,7 +35,6 @@ class CartScreen extends StatelessWidget {
             ));
           }
           else if (snapShot.connectionState == ConnectionState.active) {
-            List <Map<String, dynamic>> cart = [];
             snapShot.data!.docs.forEach((element){
               cart.add(element.data());
             });
@@ -78,19 +79,7 @@ class CartScreen extends StatelessWidget {
                                               double.infinity, 50)
                                       ),
                                       onPressed: () {
-                                        final uid = const Uuid().v4().substring(0,8);
-                                        //PaymentManger.stripePayment(40, 'USD');
-                                        ordersProvider.createNewOrder(
-                                            orderId: uid,
-                                            quantity: customerModel!.currentCartQuantity,
-                                            totalPrice: customerModel!.currentCartCost,
-                                            cartItems: cart,
-                                            status: 'Active',
-                                          comment: 'Please ship as soon as possible. Because I am buying this as a gift. Willing to pay extra for fast shipping',
-                                          phoneNo: customerModel!.phoneNumber,
-                                          shippingAddress: "104 Ambr Street, Gesr-Swes, Cairo, Egypt",
-                                          shippingFee: 0.00
-                                        );
+                                        GlobalMethods().navigateTo(context: context, route: CreateNewOrder(cartItems: cart,));
                                       },
                                       child: Text("Checkout ${customerModel!.currentCartQuantity} Items for ${customerModel!.currentCartCost} EGP",
                                         style: const TextStyle(color: Colors.white,

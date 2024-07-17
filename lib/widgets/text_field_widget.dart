@@ -14,7 +14,8 @@ class MyTextField extends StatelessWidget {
     this.focusNode,
     this.gotoFocusNode,
     this.decoration,
-    this.padding = 15
+    this.padding = 15,
+    this.maxLines = 1
   });
 
   final String hint;
@@ -26,6 +27,7 @@ class MyTextField extends StatelessWidget {
       borderSide: BorderSide(color: Colors.grey)
   );
   double padding = 15;
+  int maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class MyTextField extends StatelessWidget {
     return Padding(
       padding:  EdgeInsets.symmetric(vertical: padding),
       child: TextFormField(
-        maxLines: 1,
+        maxLines: maxLines,
         controller: textEditingController,
         decoration:  InputDecoration(
           enabledBorder: decoration,

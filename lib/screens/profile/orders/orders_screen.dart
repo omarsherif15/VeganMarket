@@ -16,47 +16,36 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<OrdersProvider>(
-        builder: (_, provider ,child) => ConditionalBuilder(
-            condition: !provider.orders.isNotEmpty,
-            builder: (context) => DefaultTabController(
-              length:3,
-              child: Scaffold(
-                backgroundColor: Colors.grey.shade100,
-                appBar: AppBar(
-                  title: const Text('My Orders',style: TextStyle(fontWeight: FontWeight.bold),),
-                  centerTitle: true,
-                  bottom: PreferredSize(
-                    preferredSize: const Size.fromHeight(55),
-                    child: Container(
-                      color: Colors.white,
-                      child: TabBar(
-                        tabs: tabBar,
-                        labelPadding: EdgeInsets.zero,
-                        indicatorPadding: EdgeInsets.zero,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicatorWeight: 5,
-                        indicatorColor: Colors.green,
-                      ),
-                    ),
+        builder: (_, provider ,child) => DefaultTabController(
+          length:3,
+          child: Scaffold(
+            backgroundColor: Colors.grey.shade100,
+            appBar: AppBar(
+              title: const Text('My Orders',style: TextStyle(fontWeight: FontWeight.bold),),
+              centerTitle: true,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(55),
+                child: Container(
+                  color: Colors.white,
+                  child: TabBar(
+                    tabs: tabBar,
+                    labelPadding: EdgeInsets.zero,
+                    indicatorPadding: EdgeInsets.zero,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorWeight: 5,
+                    indicatorColor: Colors.green,
                   ),
-                ),
-                body: const TabBarView(
-                  children: [
-                    ActiveOrdersScreen(),
-                    CompletedOrdersScreen(),
-                    CancelledOrdersScreem(),
-                  ],
                 ),
               ),
             ),
-            fallback:(context) =>  FallBack(
-              msg: 'You have made no orders\nLets try making one',
-              image: 'assets/random/box.png',
-              buttonTitle: 'Order Now',
-              onTap: (){
-                GlobalMethods().navigateTo(context: context, route: MainScreen());
-              },
-            )
+            body: const TabBarView(
+              children: [
+                ActiveOrdersScreen(),
+                CompletedOrdersScreen(),
+                CancelledOrdersScreem(),
+              ],
+            ),
+          ),
         ),
       );
   }

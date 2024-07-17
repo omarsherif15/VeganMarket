@@ -10,6 +10,7 @@ CustomerModel _$CustomerModelFromJson(Map<String, dynamic> json) =>
     CustomerModel(
       customerUID: json['customerUID'] as String?,
       fullName: json['fullName'] as String?,
+      defaultShippingAddress: json['defaultShippingAddress'] as String?,
       emailAddress: json['emailAddress'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       imageUrl: json['imageUrl'] as String?,
@@ -27,6 +28,7 @@ Map<String, dynamic> _$CustomerModelToJson(CustomerModel instance) =>
       'emailAddress': instance.emailAddress,
       'phoneNumber': instance.phoneNumber,
       'imageUrl': instance.imageUrl,
+      'defaultShippingAddress': instance.defaultShippingAddress,
       'createdAt': instance.createdAt,
       'loginType': instance.loginType,
       'totalSpent': instance.totalSpent,

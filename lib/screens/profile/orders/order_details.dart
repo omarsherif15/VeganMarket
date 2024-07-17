@@ -86,7 +86,7 @@ class OrderDetails extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('SubTotal', style: TextStyle(fontSize: 15),),

@@ -23,12 +23,14 @@ class ActiveOrdersScreen extends StatelessWidget {
                 .where("status", isEqualTo: "Active").snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
+                print(snapshot.connectionState);
                 return const Center(child: SpinKitThreeBounce(
                   size: 50,
                   color: Colors.green,
                 ));
               }
               else if (snapshot.connectionState == ConnectionState.active) {
+                print(snapshot.connectionState);
                 return ListView.builder(
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) =>

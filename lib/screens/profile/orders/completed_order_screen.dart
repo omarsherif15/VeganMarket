@@ -34,12 +34,12 @@ class CompletedOrdersScreen extends StatelessWidget {
                         snapshot.data!.docs[index].data()),)
             );
           }
-          return FallBack(
-              msg: 'ops, Something Went wrong',
-              image: 'assets/random/warning-sign.png',
-              buttonTitle: 'Try Again',
-              onTap: (){}
-          );
+            return FallBack(
+                msg: 'ops, Something Went wrong',
+                image: 'assets/random/warning-sign.png',
+                buttonTitle: 'Try Again',
+                onTap: (){}
+            );
         }
       )
     );
